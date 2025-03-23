@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-container">
+        <h2>تسجيل الدخول</h2>
+        <input type="text" id="name-input" placeholder="أدخل اسمك الحقيقي">
+        <button id="login-button">تسجيل الدخول</button>
+    </div>
+    <script>
+        const loginButton = document.getElementById('login-button');
+        loginButton.addEventListener('click', () => {
+            const nameInput = document.getElementById('name-input').value;
+            if (nameInput) {
+                localStorage.setItem('username', nameInput);
+                window.location.href = 'index.html'; // الانتقال إلى صفحة الدردشة
+            } else {
+                alert('يرجى إدخال اسمك الحقيقي!');
+            }
+        });
+    </script>
+</body>
+</html>

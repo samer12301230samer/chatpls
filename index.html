@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دردشة بسيطة</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <input type="text" id="message-input" placeholder="اكتب رسالتك هنا...">
+        <button id="send-button">إرسال</button>
+    </div>
+    <script>
+        // استرجاع اسم المستخدم من localStorage
+        const username = localStorage.getItem('username');
+        if (!username) {
+            window.location.href = 'login.html'; // السير إلى صفحة تسجيل الدخول إذا لم يتم تسجيل الدخول
+        }
+
+        const messages = document.getElementById('messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', () => {
+            const messageText = messageInput.value;
+            if (messageText) {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message message-user';
+                
+                // إضافة توقيت الرسالة
+                const timestamp = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+                messageElement.innerHTML = `${username}: ${messageText} <span class="timestamp">${timestamp}</span>`;
+                
+                messages.appendChild(messageElement);
+                messageInput.value = '';
+                messages.scrollTop = messages.scrollHeight; // للتمرير إلى الأسفل تلقائيًا
+            }
+        });
+    </script>
+</body>
+</html>
